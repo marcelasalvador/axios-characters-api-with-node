@@ -79,7 +79,14 @@ router.post("/characters/:id/update", (req, res, next) => {
 
 // Delete character
 
-
+router.post("/characters/:id/delete", (req,res,next) => {
+    axios.delete (`https://ih-crud-api.herokuapp.com/characters/${req.params.id}`)
+    .then(responseFromAPI => {
+        // console.log(responseFromAPI)
+        res.render("/characters", { character: responseFromAPI.data });
+    })
+    .catch(err => console.error(err))
+})
 
 
 module.exports = router;
